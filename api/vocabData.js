@@ -1,12 +1,9 @@
 import client from '../utils/client';
-// API CALLS FOR BOOKS
 
 const endpoint = client.databaseURL;
 
-// TODO: GET BOOKS
-
+// uses promise to get all vocab with a uid equal to the user's
 const getVocab = (uid) => new Promise((resolve, reject) => {
-  // api/bookData.js
   fetch(`${endpoint}/vocab.json?orderBy="uid"&equalTo="${uid}"`, {
     method: 'GET',
     headers: {
@@ -24,7 +21,7 @@ const getVocab = (uid) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-// TODO: DELETE BOOK
+// uses promise to delete specified firebaseKey, therefore deleting the card as it relies on the firebaseKey.
 const deleteVocab = (firebaseKey) => new Promise((resolve, reject) => {
   fetch(`${endpoint}/vocab/${firebaseKey}.json`, {
     method: 'DELETE',
@@ -37,7 +34,7 @@ const deleteVocab = (firebaseKey) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-// FIXME: GET SINGLE AUTHOR
+// gets data of specified vocab piece.
 const getSingleVocab = (firebaseKey) => new Promise((resolve, reject) => {
   fetch(`${endpoint}/vocab/${firebaseKey}.json`, {
     method: 'GET',
@@ -50,7 +47,7 @@ const getSingleVocab = (firebaseKey) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-// TODO: CREATE BOOK
+// uses promise to create vocab and add the entirety of it to the vocab array.
 const createVocab = (payload) => new Promise((resolve, reject) => {
   fetch(`${endpoint}/vocab.json`, {
     method: 'POST',
@@ -64,6 +61,7 @@ const createVocab = (payload) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+// uses promise to grab payload specified in formEvents.js and then allow 'PATCHING' or editing of that part of the array.
 const updateVocab = (payload) => new Promise((resolve, reject) => {
   fetch(`${endpoint}/vocab/${payload.firebaseKey}.json`, {
     method: 'PATCH',
@@ -77,21 +75,7 @@ const updateVocab = (payload) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-// // TODO: UPDATE BOOK
-// const updateBook = (payload) => new Promise((resolve, reject) => {
-//   fetch(`${endpoint}/books/${payload.firebaseKey}.json`, {
-//     method: 'PATCH',
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-//     body: JSON.stringify(payload),
-//   })
-//     .then((response) => response.json())
-//     .then(resolve)
-//     .catch(reject);
-// });
-
-// TODO: FILTER BOOKS ON SALE
+// uses promise to get specified cards that both have the user's uid and tests if the item.language is JavaScript
 const jsVocab = (uid) => new Promise((resolve, reject) => {
   fetch(`${endpoint}/vocab.json?orderBy="uid"&equalTo="${uid}"`, {
     method: 'GET',
@@ -102,7 +86,6 @@ const jsVocab = (uid) => new Promise((resolve, reject) => {
     .then((response) => response.json())
     .then((data) => {
       const jsLang = Object.values(data).filter((item) => item.language === 'JavaScript');
-      // const lang = document.querySelector('#language');
       console.warn(jsLang);
       if (data) {
         resolve(jsLang);
@@ -113,6 +96,7 @@ const jsVocab = (uid) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+// uses promise to get specified cards that both have the user's uid and tests if the item.language is HTML
 const htmlVocab = (uid) => new Promise((resolve, reject) => {
   fetch(`${endpoint}/vocab.json?orderBy="uid"&equalTo="${uid}"`, {
     method: 'GET',
@@ -134,6 +118,7 @@ const htmlVocab = (uid) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+// uses promise to get specified cards that both have the user's uid and tests if the item.language is CSS
 const cssVocab = (uid) => new Promise((resolve, reject) => {
   fetch(`${endpoint}/vocab.json?orderBy="uid"&equalTo="${uid}"`, {
     method: 'GET',
@@ -155,7 +140,19 @@ const cssVocab = (uid) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-// TODO: STRETCH...SEARCH BOOKS
+// attempt to sort FAILED
+// const getVocabTime = () => new Promise((resolve, reject) => {
+//   fetch(`${endpoint}/vocab.json?orderBy="timestamp"`, {
+//     method: 'GET',
+//     headers: {
+//       'Content-Type': 'application/json',
+//     },
+//   })
+//     .then((response) => resolve(Object.values(response.data)))
+//     .catch(reject);
+// });
+
+// TODO: STRETCH...SEARCH VOCAB
 
 export {
   getVocab,
@@ -166,4 +163,5 @@ export {
   jsVocab,
   htmlVocab,
   cssVocab,
+  // getVocabTime
 };

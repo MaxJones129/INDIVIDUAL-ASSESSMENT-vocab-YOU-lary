@@ -77,8 +77,8 @@ Create issue tickets from the items below to help you get started.
 ## Stretch 2
 [Stretch 2 Wireframe](https://www.figma.com/file/UC3Gi8HFRkZY8OIMOAUgL4/Stretch-2)
 - [ ] Users can search vocabulary entries
-- [ ] Users can add Language/Tech to the database and refrerence it on their vocabulary entries
-- [ ] Users can only see the Languages/Tech categories that they created
+- [✔] Users can add Language/Tech to the database and refrerence it on their vocabulary entries
+- [✔] Users can only see the Languages/Tech categories that they created
 
 ## Stretch 3
 [Stretch 3 Wireframe](https://www.figma.com/file/KgbkfaoRd5F8Q4qZ3G2Bg2/Stretch-3)

@@ -1,5 +1,6 @@
 import firebase from 'firebase';
 import addVocabForm from '../forms/addVocabForm';
+import addLanguageForm from '../forms/addLanguageForm';
 import { getSingleVocab, getVocab, deleteVocab } from '../../api/vocabData';
 import { showVocab } from '../../pages/vocabCard';
 
@@ -21,6 +22,24 @@ const domEvents = () => {
     if (e.target.id.includes('add-vocab-btn')) {
       addVocabForm();
     }
+
+    if (e.target.id.includes('addLanguage')) {
+      addLanguageForm();
+    }
+
+    if (e.target.id.includes('sort-button')) {
+      // Promise.all(     array     ).then((results) => { results.sort(); });
+    }
+
+    // const search = (event) => {
+    //   const eventLC = event.target.value.toLowerCase();
+    //   const searchResult = Promise.all().filter(item =>
+    //     item.title.toLowerCase().includes(eventLC) ||
+    //     item.author.toLowerCase().includes(eventLC) ||
+    //     item.description.toLowerCase().includes(eventLC)
+    //   );
+    //   getVocab(searchResult);
+    // };
 
     // // TODO: CLICK EVENT EDITING/UPDATING A BOOK
     // if (e.target.id.includes('edit-book-btn')) {
