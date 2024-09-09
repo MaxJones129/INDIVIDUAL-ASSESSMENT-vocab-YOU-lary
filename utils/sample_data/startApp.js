@@ -17,14 +17,9 @@ const startApp = (user) => {
   logoutButton(); // ADD THE LOGOUT BUTTON COMPONENT
   navigationEvents(); // ATTACH THE EVENT LISTENERS TO THE NAVBAR
 
-  // TODO: Put all books on the DOM on App load
+  // puts only cards on the DOM with a matching uid to the user
   getVocab(user.uid).then((vocab) => showVocab(vocab));
   console.warn(user.uid);
-  const now = new Date();
-  const day = now.getDay(); // returns a number representing the day of the week, starting with 0 for Sunday
-  const hours = now.getHours();
-  const minutes = now.getMinutes();
-  console.warn(`Today is day ${day} and the time is ${hours}:${minutes}.`);
 };
 
 export default startApp;

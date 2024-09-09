@@ -5,56 +5,46 @@ import { showVocab } from '../../pages/vocabCard';
 const formEvents = () => {
   document.querySelector('#main-container').addEventListener('submit', (e) => {
     e.preventDefault();
-    // TODO: CLICK EVENT FOR SUBMITTING FORM FOR ADDING A BOOK
-    // if (e.target.id.includes('submit-book')) {
-    //   const payload = {
-    //     title: document.querySelector('#title').value,
-    //     description: document.querySelector('#description').value,
-    //     image: document.querySelector('#image').value,
-    //     price: document.querySelector('#price').value,
-    //     author_id: document.querySelector('#author_id').value,
-    //     sale: document.querySelector('#sale').checked,
-    //     uid: `${firebase.auth().currentUser.uid}`,
-    //   };
-    //   createBook(payload).then(({ name }) => {
-    //     const patchPayload = { firebaseKey: name };
-    //     updateBook(patchPayload).then(() => {
-    //       getBooks(`${firebase.auth().currentUser.uid}`).then(showBooks);
-    //     });
-    //   });
-    // }
-
-    // // TODO: CLICK EVENT FOR EDITING A BOOK
-    // if (e.target.id.includes('update-book')) {
-    //   const [, firebaseKey] = e.target.id.split('--');
-    //   const payload = {
-    //     title: document.querySelector('#title').value,
-    //     description: document.querySelector('#description').value,
-    //     image: document.querySelector('#image').value,
-    //     price: document.querySelector('#price').value,
-    //     author_id: document.querySelector('#author_id').value,
-    //     sale: document.querySelector('#sale').checked,
-    //     firebaseKey,
-    //   };
-    //   updateBook(payload).then(() => {
-    //     getBooks(`${firebase.auth().currentUser.uid}`).then(showBooks);
-    //   });
-    // }
-
-    // // FIXME: ADD CLICK EVENT FOR SUBMITTING FORM FOR ADDING AN AUTHOR
+    // waits for submit click on addVocabForm and then uses this function to create new data
     if (e.target.id.includes('submit-vocab')) {
       console.warn('work');
       const [, firebaseKey] = e.target.id.split('--');
       const now = new Date();
       const month = now.getMonth() + 1;
-      const day = now.getDay() + 1; // returns a number representing the day of the week, starting with 0 for Sunday
+      const day = now.getDay() + 1;
       const hours = now.getHours();
       const minutes = now.getMinutes();
-      // console.warn(`Today is day ${day} and the time is ${hours}:${minutes}.`);
+      console.warn(document.querySelector('#language').value);
       const payload = {
         title: document.querySelector('#title').value,
         description: document.querySelector('#description').value,
         language: document.querySelector('#language').value,
+        uid: `${firebase.auth().currentUser.uid}`,
+        firebaseKey,
+        time: `Created on ${day} of ${month} at ${hours}:${minutes}`
+      };
+      console.warn(document.querySelector('#language').value);
+      createVocab(payload).then(({ name }) => {
+        const patchPayload = { firebaseKey: name };
+        updateVocab(patchPayload).then(() => {
+          getVocab(`${firebase.auth().currentUser.uid}`).then(showVocab);
+        });
+      });
+    }
+
+    // waits for submit click on addLanguageForm and then uses this function to create new data
+    if (e.target.id.includes('submit2-vocab')) {
+      console.warn('work');
+      const [, firebaseKey] = e.target.id.split('--');
+      const now = new Date();
+      const month = now.getMonth() + 1;
+      const day = now.getDay() + 1;
+      const hours = now.getHours();
+      const minutes = now.getMinutes();
+      const payload = {
+        title: document.querySelector('#title').value,
+        description: document.querySelector('#description').value,
+        language: document.querySelector('#createLanguage').value,
         uid: `${firebase.auth().currentUser.uid}`,
         firebaseKey,
         time: `Created on ${day} of ${month} at ${hours}:${minutes}`
@@ -66,19 +56,19 @@ const formEvents = () => {
         });
       });
     }
-    // FIXME:ADD CLICK EVENT FOR EDITING AN AUTHOR
+    // waits for edit click on buttons then grabs payload from specified vocab and puts it on an addVocabForm
     if (e.target.id.includes('update-vocab')) {
       console.warn('work');
       const [, firebaseKey] = e.target.id.split('--');
       const now = new Date();
       const month = now.getMonth() + 1;
-      const day = now.getDay() + 1; // returns a number representing the day of the week, starting with 0 for Sunday
+      const day = now.getDay() + 1;
       const hours = now.getHours();
       const minutes = now.getMinutes();
       const payload = {
         title: document.querySelector('#title').value,
         description: document.querySelector('#description').value,
-        language: document.querySelector('#language').value,
+        language: document.querySelector('#select-language').value,
         uid: `${firebase.auth().currentUser.uid}`,
         firebaseKey,
         time: `Updated on ${day} of ${month} at ${hours}:${minutes}`
